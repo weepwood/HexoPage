@@ -9,8 +9,8 @@ import subprocess
 import tempfile
 from urllib.parse import unquote, urlsplit
 
-REPO = Path(__file__).resolve().parents[1]
-MANIFEST = json.loads((REPO / 'scripts/pages-versions.json').read_text())
+REPO = Path(__file__).resolve().parents[2]
+MANIFEST = json.loads((REPO / '.github/pages/pages-versions.json').read_text())
 OUT = REPO / '_pages'
 BASE = os.environ.get('PAGES_URL', 'https://weepwood.github.io/HexoPage').rstrip('/')
 BASE_PATH = urlsplit(BASE).path.rstrip('/')

@@ -2,7 +2,7 @@ name: 发布历史博客
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/pages.yml', 'scripts/**']
+    paths: ['.github/workflows/pages.yml', '.github/pages/**']
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,7 +27,7 @@ jobs:
       - name: 构建固定版本并验证关键产物
         env:
           PAGES_URL: ${{ steps.pages.outputs.base_url }}
-        run: python3 scripts/build-pages.py
+        run: python3 .github/pages/build-pages.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _pages
