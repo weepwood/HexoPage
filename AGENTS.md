@@ -17,3 +17,8 @@
 ## V2.1 视觉方向（用户确认）
 - 主站必须保持原 Butterfly 的导航、交替封面卡片、作者侧栏及原文章信息架构；优化性能、排版和交互细节，不擅自换主题。
 - `butterfly-optimized/` 存放独立兼容优化层，在临时构建副本中启用；保留 `modern/` 对应 V2.0.0 预览。历史标签禁止移动。详见 `docs/V2.1-Butterfly优化报告.md`。
+
+## V2.2 资源与动效规范
+- 主站保留 Butterfly 视觉体系，远程中文字体使用可变 WOFF2 + Unicode 分片 + swap 与系统字体后备。
+- 所有主站图片进入本仓库 `source/images/archive/`，禁止使用 OSS 或独立图库仓库作为运行时依赖。来源及缺失记录保存在 `butterfly-optimized/assets/images.json`，构建不联网下载图片，新增外链必须迁移或明确本地占位。
+- 动态横幅保留原素材及深度视差，鼠标离开回中，离屏和隐藏时停止，移动端及 reduced-motion 降级。详细见 `docs/V2.2-字体图片与动效优化.md`。

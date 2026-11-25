@@ -15,3 +15,32 @@
 #local-search-results .halo-search-status{font-size:13px;color:inherit;opacity:.7;padding:8px 0}
 #local-search-results .search-result{overflow-wrap:anywhere}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* V2.2: small refinements, not a layout rewrite. */
+#springBanner{isolation:isolate;overflow:hidden;touch-action:pan-y;contain:layout paint;position:relative}
+#springBanner>.layer{pointer-events:none;transform:translate3d(0,0,0)}
+#springBanner.is-tracking>.layer{will-change:transform}
+#springBanner>.layer img{flex-shrink:0;max-width:none;user-select:none;-webkit-user-drag:none}
+#springBanner>#canvas{pointer-events:none}
+#nav #site-name{font-weight:650;letter-spacing:.015em}
+#nav .menus_items .menus_item a.site-page{font-weight:500}
+#recent-posts>.recent-post-item{border-radius:12px;overflow:hidden}
+#aside-content .card-widget{border-radius:12px}
+#recent-posts .recent-post-info .article-title{font-weight:600}
+#recent-posts .recent-post-info .article-meta-wrap{font-size:.85em;line-height:1.7}
+#aside-content .card-info .card-info-avatar .avatar-img{object-fit:cover}
+#aside-content .card-info .card-info-data{margin-top:12px}
+#article-container p{margin:0 0 1.15em}
+#article-container a:not(.fancybox):not(.link-card){text-underline-offset:3px}
+#article-container img{border-radius:5px}
+#local-search .search-dialog{border-radius:14px;box-shadow:0 20px 65px rgba(18,34,54,.2)}
+#local-search-input input{border-radius:8px}
+@media(hover:hover){ #recent-posts .recent-post-item .post_cover img{transition:transform .35s cubic-bezier(.2,.7,.2,1)}#recent-posts .recent-post-item:hover .post_cover img{transform:scale(1.035)}}
+@media(prefers-reduced-motion:reduce){ #springBanner>.layer{transform:none!important}}
+#springBanner .halo-petals{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;overflow:hidden}
+#springBanner.is-tracking .halo-petals{opacity:1}
+#springBanner .halo-petals span{position:absolute;left:var(--left);top:-20px;width:14px;height:14px;background:url(/images/archive/petal-1.webp) center/contain no-repeat;animation:halo-petal var(--duration) var(--delay) linear infinite;animation-play-state:paused}
+#springBanner .halo-petals span:nth-child(2n){background-image:url(/images/archive/petal-2.webp);width:10px;height:10px}
+#springBanner.is-tracking .halo-petals span{animation-play-state:running}
+@keyframes halo-petal{from{transform:translate3d(0,-15px,0) rotate(0deg)}to{transform:translate3d(70px,220px,0) rotate(230deg)}}
+@media(prefers-reduced-motion:reduce),(hover:none){ #springBanner .halo-petals{display:none}}

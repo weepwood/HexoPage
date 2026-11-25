@@ -1,5 +1,5 @@
 from pathlib import Path
-import re, shutil, subprocess, json, html, xml.etree.ElementTree as ET
+import re, shutil, subprocess, json, html, importlib.util, xml.etree.ElementTree as ET
 from urllib.parse import unquote, urlsplit
 from html.parser import HTMLParser
 
@@ -13,6 +13,11 @@ class Text(HTMLParser):
         elif tag in ('p','div','li','tr','pre','td'):self.parts.append(' ')
     def handle_data(self,data):
         if not self.skip:self.parts.append(data)
+
+def load_policy(opt):
+    p=opt/"assets_policy.py"
+    if not p.exists():return None
+    spec=importlib.util.spec_from_file_location("asset_policy",p);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
 
 def prepare(work):
     opt=work/'butterfly-optimized'
@@ -39,6 +44,8 @@ def prepare(work):
     shutil.copy2(opt/'refine.css',work/'source/css/halo-refine.css');shutil.copy2(opt/'search.js',theme/'source/js/search/local-search.js')
     # Preserve the original animated spring banner, but avoid a perpetual animation when offscreen.
     banner=work/'source/js/bilibili-banner.js';b=banner.read_text();b=b.replace('ctx.drawImage(this.img, this.x, this.y, this.width, this.height)\n    }','if (this.img.complete && this.img.naturalWidth) ctx.drawImage(this.img, this.x, this.y, this.width, this.height)\n    }');b=b.replace('    ctx.clearRect(0, 0, _w, _h)','    if (document.hidden || mb.getBoundingClientRect().bottom < 0) { window.requestAnimationFrame(move); return }\n    ctx.clearRect(0, 0, _w, _h)').replace('start()\nmove()','if (!matchMedia("(prefers-reduced-motion: reduce)").matches) { start(); move() }');banner.write_text(b)
+    policy=load_policy(opt)
+    if policy:policy.prepare(work)
     subprocess.run(['npm','ci','--ignore-scripts','--no-audit','--no-fund'],cwd=opt,check=True)
     n=opt/'node_modules';dst=work/'source/vendor'
     for source,target in [('@fortawesome/fontawesome-free/css/all.min.css','fontawesome/css/all.min.css'),('jquery/dist/jquery.min.js','jquery/jquery.min.js'),('@fancyapps/fancybox/dist/jquery.fancybox.min.css','fancybox/jquery.fancybox.min.css'),('@fancyapps/fancybox/dist/jquery.fancybox.min.js','fancybox/jquery.fancybox.min.js')]:
@@ -74,6 +81,8 @@ def finish(work,root):
                 return v
             return v if re.search(r'\bloading=',v) else v.replace('<img','<img loading="lazy" decoding="async"',1)
         s=re.sub(r'<img\b[^>]*>',img,s,flags=re.I);page.write_text(s,encoding='utf-8')
+    policy=load_policy(work/'butterfly-optimized')
+    if policy:policy.finish(work,root)
     subprocess.run(['node','butterfly-optimized/minify.cjs'],cwd=work,check=True)
     for name,limit in {'index.html':60000,'css/index.css':220000,'js/main.js':32000,'search-meta.json':50000}.items():
         if not 0<(public/name).stat().st_size<=limit:raise RuntimeError('asset exceeds budget: '+name)
