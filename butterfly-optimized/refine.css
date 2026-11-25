@@ -117,3 +117,22 @@
 #article-container .highlight .copy-button:focus-visible{outline:2px solid #49a4dc;outline-offset:3px}
 #article-container .note.warning.modern>p{color:#684707}
 [data-theme=dark] #article-container .note.warning.modern>p{color:#f3d5a0}
+
+/* GitHub comment bridge, integrated into the original Butterfly article surface. */
+#halo-comments{padding:14px 0 5px;color:var(--halo-text)}
+#halo-comments .halo-comment-intro{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px;border:1px solid var(--halo-rule);border-radius:10px;background:var(--halo-hover)}
+#halo-comments .halo-comment-intro strong{font-size:16px}
+#halo-comments .halo-comment-intro p{font-size:13px;color:var(--halo-muted);margin:4px 0 0;line-height:1.6}
+#halo-comments .halo-comment-primary{display:inline-flex;justify-content:center;align-items:center;min-height:40px;flex-shrink:0;padding:8px 14px;border-radius:7px;background:#3564a3;color:#fff;font-size:13px;text-decoration:none}
+#halo-comments .halo-comment-primary:hover{background:#285488}
+#halo-comments .halo-comment-status{font-size:13px;color:var(--halo-muted);padding:12px 0;margin:0}
+#halo-comments .halo-comment-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:13px}
+#halo-comments .halo-comment-actions a{color:var(--halo-link)}
+#halo-comments .halo-comment-retry{padding:5px 10px;border:1px solid var(--halo-rule);border-radius:6px;background:transparent;color:var(--halo-text);cursor:pointer}
+#halo-comments .halo-comment-item{padding:12px 0;border-bottom:1px solid var(--halo-rule)}
+#halo-comments .halo-comment-meta{display:flex;align-items:center;gap:10px;font-size:13px}
+#halo-comments .halo-comment-meta time{color:var(--halo-muted)}
+#halo-comments .halo-comment-body{white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 0;line-height:1.7}
+#halo-comments [hidden]{display:none!important}
+#halo-comments :is(a,button):focus-visible{outline:2px solid #49a4dc;outline-offset:3px}
+@media(max-width:600px){ #halo-comments .halo-comment-intro{align-items:stretch;flex-direction:column}#halo-comments .halo-comment-primary{width:100%}}

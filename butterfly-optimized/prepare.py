@@ -53,10 +53,11 @@ def prepare(work):
         start=js.index('  const tocFn = function () {')
         end=js.index('  /**\n * Rightside',start)
         js=js[:start]+'  const tocFn = function () { window.haloInitToc() }\n\n'+js[end:]
-        main.write_text(toc.read_text()+'\n'+(opt/'reading.js').read_text()+'\n'+js)
+        main.write_text(toc.read_text()+';\n'+(opt/'reading.js').read_text()+';\n'+js)
 
     subprocess.run(['npm','ci','--ignore-scripts','--no-audit','--no-fund'],cwd=opt,check=True)
     spec=importlib.util.spec_from_file_location('compat',opt/'compat.py');compat=importlib.util.module_from_spec(spec);spec.loader.exec_module(compat);compat.prepare(work)
+    spec=importlib.util.spec_from_file_location('comments',opt/'comments.py');comments=importlib.util.module_from_spec(spec);spec.loader.exec_module(comments);comments.prepare(work)
     n=opt/'node_modules';dst=work/'source/vendor'
     for source,target in [('@fortawesome/fontawesome-free/css/all.min.css','fontawesome/css/all.min.css'),('jquery/dist/jquery.min.js','jquery/jquery.min.js'),('@fancyapps/fancybox/dist/jquery.fancybox.min.css','fancybox/jquery.fancybox.min.css'),('@fancyapps/fancybox/dist/jquery.fancybox.min.js','fancybox/jquery.fancybox.min.js')]:
         dest=dst/target;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(n/source,dest)
@@ -96,6 +97,7 @@ def finish(work,root):
     subprocess.run(['node','butterfly-optimized/minify.cjs'],cwd=work,check=True)
     q=work/'butterfly-optimized/quality.py'
     spec=importlib.util.spec_from_file_location('quality',q);quality=importlib.util.module_from_spec(spec);spec.loader.exec_module(quality);quality.finish(work,root);quality.seo(work,root)
+    spec=importlib.util.spec_from_file_location('comments',work/'butterfly-optimized/comments.py');comments=importlib.util.module_from_spec(spec);spec.loader.exec_module(comments);comments.finish(work,root)
     subprocess.run([str(work/'butterfly-optimized/node_modules/.bin/pagefind'),'--site',str(public),'--root-selector','#article-container','--glob','20*/**/index.html','--force-language','zh','--exclude-selectors','.headerlink,.highlight-tools,.copy-button'],cwd=work,check=True)
     if not (public/'pagefind/pagefind.js').is_file():raise RuntimeError('Pagefind bundle missing')
     for name,limit in {'index.html':60000,'css/index.css':220000,'js/main.js':32000,'search-meta.json':50000}.items():
