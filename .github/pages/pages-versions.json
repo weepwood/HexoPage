@@ -1,5 +1,5 @@
 {
-  "latest": "v2.7.0",
+  "latest": "v2.8.0",
   "versions": {
     "v1.0.0": "70a1ac9aa9e438712a7ab17300e182027e184946",
     "v2.0.0": "7a05121e9bdfb54bdd21b62c8e5c9b24cb3f5d9b",
@@ -10,6 +10,7 @@
     "v2.5.0": "c13e3022de027c8a700de43b89196076765b7296",
     "v2.5.1": "760976ff17715d89ae251dc070af6a79a4009ee8",
     "v2.6.0": "dfaac3a008a8a66452ec3111d4139c52d1fe8cbb",
-    "v2.7.0": "ae05e88bee5aeeacf1d2f490234ab4dc4dd485b7"
+    "v2.7.0": "ae05e88bee5aeeacf1d2f490234ab4dc4dd485b7",
+    "v2.8.0": "7d9f10c9531c941d9fbaf6998c393bbcfdc73a9c"
   }
 }
