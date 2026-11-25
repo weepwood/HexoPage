@@ -100,7 +100,8 @@ def build(version, sha, destinations):
         work = Path(d)
         archive = subprocess.check_output(['git', 'archive', sha], cwd=REPO)
         subprocess.run(['tar', '-xf', '-'], input=archive, cwd=work, check=True)
-        if (work / 'modern/prepare.py').is_file():
+        optimized = (work / 'butterfly-optimized/prepare.py').is_file()
+        if (work / 'modern/prepare.py').is_file() and not optimized:
             build_modern(work, destinations, version, sha)
             return
         # Do not publish an obsolete custom domain.
@@ -127,6 +128,11 @@ def build(version, sha, destinations):
             script = banner.read_text(encoding='utf-8')
             banner.write_text("if (document.getElementById('springBanner') && document.getElementById('canvas')) {\n" + script + '\n}\n', encoding='utf-8')
             theme.write_text(config, encoding='utf-8')
+        if optimized:
+            spec = importlib.util.spec_from_file_location('butterfly_optimized', work / 'butterfly-optimized/prepare.py')
+            opt = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(opt)
+            opt.prepare(work)
         run('npm', 'ci', '--ignore-scripts', '--legacy-peer-deps', '--no-audit', '--no-fund', cwd=work)
         for relative in destinations:
             root = BASE_PATH + ('/' + relative if relative else '') + '/'
@@ -135,6 +141,8 @@ def build(version, sha, destinations):
             run('npm', 'run', 'clean', cwd=work)
             run('npm', 'run', 'build', '--', '--config', '_config.yml,_config.pages.json', cwd=work)
             public = work / 'public'
+            if optimized:
+                opt.finish(work, root)
             rebase_assets(public, root)
             for name in ('index.html', 'archives/index.html', 'css/index.css', 'js/main.js', 'js/utils.js', 'search.xml'):
                 if not (public / name).is_file() or (public / name).stat().st_size == 0:
@@ -144,7 +152,7 @@ def build(version, sha, destinations):
                 raise RuntimeError('No generated article pages')
             dest = OUT / relative
             shutil.copytree(public, dest, dirs_exist_ok=True)
-            (dest / 'version.json').write_text(json.dumps({'version': version, 'commit': sha, 'posts': len(posts)}, indent=2), encoding='utf-8')
+            (dest / 'version.json').write_text(json.dumps({'version': version, 'commit': sha, 'posts': len(json.loads((public / 'search-meta.json').read_text())) if optimized else len(posts)}, indent=2), encoding='utf-8')
             print(f'Built {root}: {len(posts)} dated pages', flush=True)
 
 

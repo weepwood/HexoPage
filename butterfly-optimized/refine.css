@@ -1,0 +1,17 @@
+/* HALO Butterfly refinement: preserve the original cover cards, sidebar and layout. */
+:root{--halo-border:rgba(45,65,90,.09);--halo-shadow:0 3px 14px rgba(35,55,80,.06)}
+[data-theme=dark]{--halo-border:rgba(255,255,255,.10);--halo-shadow:0 3px 14px rgba(0,0,0,.15)}
+#recent-posts>.recent-post-item,#aside-content .card-widget,#post,#page,#archive,#tag,#category{border:1px solid var(--halo-border);box-shadow:var(--halo-shadow)}
+#recent-posts>.recent-post-item:hover,#aside-content .card-widget:hover{box-shadow:0 5px 20px rgba(35,55,80,.10)}
+#recent-posts .recent-post-info .article-title{letter-spacing:-.015em;line-height:1.45}
+#recent-posts .recent-post-info .content{line-height:1.75;overflow-wrap:anywhere}
+#article-container{line-height:1.85;overflow-wrap:anywhere}
+#article-container img{max-width:100%;height:auto}
+#article-container pre,#article-container .highlight{overflow:auto}
+#page .tag-cloud-list a{border-radius:8px!important}
+[data-theme=dark] #page .tag-cloud-list a{background:#303944;color:#dce4ef!important}
+[data-theme=dark] #footer #footer-wrap,[data-theme=dark] #footer #footer-wrap a{color:#b8c3d0}
+#nav a:focus-visible,button:focus-visible,a.article-title:focus-visible,.search-close-button:focus-visible{outline:2px solid #49b1f5;outline-offset:3px}
+#local-search-results .halo-search-status{font-size:13px;color:inherit;opacity:.7;padding:8px 0}
+#local-search-results .search-result{overflow-wrap:anywhere}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
