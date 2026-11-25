@@ -41,7 +41,12 @@ def prepare(work):
     s=re.sub(r'(?m)^    - <link rel="stylesheet" href="/css/bilibiliBanner.css"[^\n]*\n','',s)
     cfg.write_text(s)
     css=work/'source/css/butterfly.css'; c=css.read_text();c=re.sub(r'@font-face\s*\{\s*font-family:\s*(?:HarmonyOS_Sans_SC_Regular|MyFont);[^}]+\}','',c);c=c.replace('font-family: "HarmonyOS_Sans_SC_Regular";','font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;').replace('font-family: MyFont !important','font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important');c=re.sub(r'cursor: url\(https?://[^)]+\), default','cursor: auto',c);css.write_text(c)
-    (work/'source/css/halo-refine.css').write_text((opt/'refine.css').read_text()+'\n'+(opt/'design.css').read_text(),encoding='utf-8');shutil.copy2(opt/'search.js',theme/'source/js/search/local-search.js')
+    style_dir=opt/'styles'
+    order=json.loads((style_dir/'order.json').read_text())
+    if len(order)!=len(set(order)) or set(order)!={f.name for f in style_dir.glob('*.css')} or order[0]!='tokens.css' or order[-1]!='motion.css':
+        raise RuntimeError('Invalid design stylesheet order')
+    (work/'source/css/halo-refine.css').write_text('\n'.join((style_dir/name).read_text() for name in order),encoding='utf-8')
+    shutil.copy2(opt/'search.js',theme/'source/js/search/local-search.js')
     # Preserve the original animated spring banner, but avoid a perpetual animation when offscreen.
     banner=work/'source/js/bilibili-banner.js';b=banner.read_text();b=b.replace('ctx.drawImage(this.img, this.x, this.y, this.width, this.height)\n    }','if (this.img.complete && this.img.naturalWidth) ctx.drawImage(this.img, this.x, this.y, this.width, this.height)\n    }');b=b.replace('    ctx.clearRect(0, 0, _w, _h)','    if (document.hidden || mb.getBoundingClientRect().bottom < 0) { window.requestAnimationFrame(move); return }\n    ctx.clearRect(0, 0, _w, _h)').replace('start()\nmove()','if (!matchMedia("(prefers-reduced-motion: reduce)").matches) { start(); move() }');banner.write_text(b)
     policy=load_policy(opt)

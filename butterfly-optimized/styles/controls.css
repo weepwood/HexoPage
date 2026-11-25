@@ -1,0 +1,9 @@
+#rightside>div>button,#rightside>div>a{background:var(--halo-surface);color:var(--halo-muted);border:1px solid var(--halo-rule);border-radius:8px;box-shadow:var(--halo-shadow);transition:background-color var(--halo-fast),color var(--halo-fast),transform var(--halo-fast)}
+#rightside>div>button:hover,#rightside>div>a:hover{background:var(--halo-hover);color:var(--halo-link)}
+
+#pagination .pagination{outline:none}
+#pagination :is(.page-number,.extend){background:var(--halo-surface);color:var(--halo-muted);border:1px solid var(--halo-rule);border-radius:var(--halo-small-radius)!important;box-shadow:none;transition:background-color var(--halo-fast),color var(--halo-fast),border-color var(--halo-fast)}
+#pagination a.page-number:hover,#pagination a.extend.prev:hover,#pagination a.extend.next:hover{background:var(--halo-hover)!important;color:var(--halo-link)!important;border-color:var(--halo-accent)}
+#pagination .page-number.current,#pagination .page-number.current:hover{background:var(--halo-accent)!important;color:var(--halo-accent-ink)!important;border-color:var(--halo-accent)}
+#pagination a:focus:not(:focus-visible){outline:none}
+#pagination a:focus-visible{outline:2px solid var(--halo-focus);outline-offset:3px}

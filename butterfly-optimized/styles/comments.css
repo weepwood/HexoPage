@@ -1,0 +1,6 @@
+#halo-comments{padding:14px 0 5px;color:var(--halo-text)}
+#halo-comments [hidden]{display:none!important}
+#halo-comments .giscus{width:100%;min-width:0}
+#halo-comments .giscus-frame{width:100%;border:0;display:block}
+#halo-comments .halo-giscus-status{font-size:13px;color:var(--halo-muted);padding:10px 0;margin:0}
+#halo-comments .halo-giscus-retry{padding:8px 14px;border:1px solid var(--halo-rule);background:var(--halo-hover);border-radius:var(--halo-small-radius);color:var(--halo-text);cursor:pointer}

@@ -45,3 +45,9 @@
 - 视觉规则集中维护 butterfly-optimized/design.css，保留 Butterfly 原始结构；Inter/Noto Sans SC 远程可变字体、低饱和双主题、统一交互节奏与 reduced-motion。
 - Giscus 为主要站内评论组件，Discussions 已启用且官方客户端可正常显示，稳定 specific/strict 路径映射；保留旧 Issues 折叠入口与历史 Valine，不在前端保存访问令牌。未实际发帖不得宣称写入验收。
 - 验收使用 tests/design.cjs、tests/giscus.cjs、tests/comments.cjs，详见 docs/V2.6-视觉与站内评论.md。
+
+## V2.7 样式架构
+- 设计语言以根目录 DESIGN.md 为准。新样式集中于 butterfly-optimized/styles/，tokens.css 为唯一全局语义令牌来源，order.json 确定合并次序；禁止复建旧 refine.css/design.css。
+- 默认/hover/选中/键盘焦点分离，hover 不改变圆角及间距，不新增 transition: all；首页透明导航，有图头部局部对比遮罩。
+- Giscus 只保留站内编辑器，关闭独立表情区，禁止恢复旧 Issues 备用 UI；历史数据不删除。
+- 样式回归优先 tests/style-states.cjs、tests/design.cjs、tests/giscus.cjs。

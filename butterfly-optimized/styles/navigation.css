@@ -1,0 +1,25 @@
+#nav .menus_items .menus_item a.site-page,#nav #site-name{font-size:14px;font-weight:600;letter-spacing:0}
+#nav .menus_items .menus_item a.site-page{padding:7px 9px;border-radius:var(--halo-small-radius);transition:background-color var(--halo-fast),color var(--halo-fast)}
+
+#nav .menus_items .menus_item .menus_item_child{background:var(--halo-surface);border:1px solid var(--halo-rule);border-radius:10px;box-shadow:var(--halo-shadow-raised);padding:5px}
+#nav .menus_items .menus_item .menus_item_child a{color:var(--halo-text);border-radius:6px}
+#nav .menus_items .menus_item .menus_item_child a:hover{background:var(--halo-hover);color:var(--halo-link)}
+
+/* Homepage no-image header is transparent; photographic header has a local contrast scrim. */
+#page-header.not-top-img:not(.nav-fixed) #nav{background:transparent!important;border-bottom:0;box-shadow:none!important}
+#page-header.not-top-img #nav :is(a,span.site-page){color:var(--halo-muted);text-shadow:none}
+#nav .site-page:not(.child)::after{content:none!important;display:none!important}
+#nav .site-page{border-radius:var(--halo-small-radius);transition:background-color var(--halo-fast),color var(--halo-fast)}
+#nav .menus_items .menus_item .menus_item_child li:hover{background:transparent}
+#nav .menus_items .menus_item .menus_item_child li{border-radius:var(--halo-chip-radius)}
+#nav .site-page:hover{background:var(--halo-hover);color:var(--halo-link)}
+#page-header:not(.not-top-img):not(.nav-fixed) #nav{background:linear-gradient(180deg,rgba(13,22,35,.78),rgba(13,22,35,.66));box-shadow:none;border:0}
+#page-header:not(.not-top-img):not(.nav-fixed) #nav :is(.site-page,#site-name){color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.75)}
+#page-header:not(.not-top-img):not(.nav-fixed) #nav .site-page:hover{background:rgba(255,255,255,.16);color:#fff}
+#page-header.nav-fixed #nav{position:fixed;top:0;transform:translateY(-100%)!important;transition:transform var(--halo-normal) var(--halo-ease),opacity var(--halo-fast);pointer-events:none;visibility:hidden}
+#page-header.nav-fixed.nav-visible #nav{transform:translateY(0)!important;background:var(--halo-surface);border-bottom:1px solid var(--halo-rule);box-shadow:var(--halo-shadow);pointer-events:auto;visibility:visible}
+#page-header.nav-fixed.nav-visible #nav :is(a,span.site-page,#site-name,#toggle-menu){color:var(--halo-muted);text-shadow:none}
+#page-header.nav-fixed.nav-visible #nav .site-page:hover{background:var(--halo-hover);color:var(--halo-link)}
+#nav :is(a,button):focus-visible{outline:2px solid var(--halo-focus);outline-offset:3px}
+
+#page-header:not(.not-top-img) :is(#post-info,#page-site-info,#site-info){text-shadow:0 1px 4px rgba(0,0,0,.7),0 2px 14px rgba(0,0,0,.5)}

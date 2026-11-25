@@ -1,0 +1,4 @@
+/* Reduced-motion is the final layer, covering both old and new theme rules. */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+#recent-posts .recent-post-item:hover .post_cover img{transform:none!important;transition:none!important}
+#aside-content .card-info #card-info-btn:active,#rightside>div>button:active{transform:none}}

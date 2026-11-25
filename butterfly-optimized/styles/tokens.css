@@ -1,0 +1,25 @@
+/* Single source of semantic color, type, radius, elevation and motion. */
+:root{
+  color-scheme:light;
+  --halo-canvas:#f4f6fa;--halo-surface:#fff;--halo-raised:#fafbfe;
+  --halo-text:#222d3d;--halo-muted:#607084;--halo-faint:#778699;
+  --halo-link:#315da3;--halo-accent:#4269ae;--halo-accent-ink:#fff;
+  --halo-rule:#e1e6ee;--halo-border:var(--halo-rule);--halo-hover:#edf2fa;
+  --halo-code:#eef2f7;--halo-code-text:#314359;
+  --halo-shadow:0 2px 6px rgba(32,48,74,.035),0 10px 30px rgba(32,48,74,.035);
+  --halo-shadow-raised:0 8px 28px rgba(32,48,74,.09);
+  --halo-sans:Inter,"Noto Sans SC",-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  --halo-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --halo-ease:cubic-bezier(.2,.75,.25,1);--halo-fast:160ms;--halo-normal:260ms;
+  --halo-radius:14px;--halo-small-radius:8px;--halo-chip-radius:6px;--halo-focus:var(--halo-accent);
+}
+[data-theme=dark]{
+  color-scheme:dark;
+  --halo-canvas:#10141b;--halo-surface:#191f29;--halo-raised:#202733;
+  --halo-text:#e5eaf2;--halo-muted:#a6b3c5;--halo-faint:#93a1b4;
+  --halo-link:#9cc6fa;--halo-accent:#97baf0;--halo-accent-ink:#14243c;
+  --halo-rule:#303946;--halo-border:var(--halo-rule);--halo-hover:#283346;
+  --halo-code:#252e3c;--halo-code-text:#dfe7f5;
+  --halo-shadow:0 2px 10px rgba(0,0,0,.15);
+  --halo-shadow-raised:0 8px 25px rgba(0,0,0,.24);
+}

@@ -7,6 +7,6 @@
   "strict": "1",
   "lang": "zh-CN",
   "inputPosition": "top",
-  "reactionsEnabled": "1",
+  "reactionsEnabled": "0",
   "emitMetadata": "1"
 }

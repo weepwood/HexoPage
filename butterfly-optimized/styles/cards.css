@@ -1,0 +1,54 @@
+#recent-posts>.recent-post-item,#aside-content .card-widget,#post,#page,#archive,#tag,#category{background:var(--halo-surface);border:1px solid var(--halo-rule);border-radius:var(--halo-radius);box-shadow:var(--halo-shadow);transition:border-color var(--halo-fast),box-shadow var(--halo-normal) var(--halo-ease)}
+[data-theme=dark] #recent-posts>.recent-post-item,[data-theme=dark] #aside-content .card-widget,[data-theme=dark] #post,[data-theme=dark] #page,[data-theme=dark] #archive,[data-theme=dark] #tag,[data-theme=dark] #category{background:var(--halo-surface)}
+#recent-posts>.recent-post-item>.recent-post-info{margin-top:0;padding:24px clamp(20px,2.5vw,36px)}
+#recent-posts>.recent-post-item>.recent-post-info>.article-title{font-size:clamp(19px,1.7vw,26px);font-weight:650;line-height:1.4;letter-spacing:-.022em;color:var(--halo-text);-webkit-line-clamp:2;margin-bottom:9px;transition:color var(--halo-fast)}
+#recent-posts>.recent-post-item>.recent-post-info>.article-meta-wrap,#recent-posts>.recent-post-item>.recent-post-info>.article-meta-wrap a{font-size:12px;color:var(--halo-muted);line-height:1.6}
+#recent-posts>.recent-post-item>.recent-post-info>.content{font-size:14px;line-height:1.7;color:var(--halo-muted);margin-top:9px;-webkit-line-clamp:2}
+#recent-posts .recent-post-item .post_cover img{transition:transform 420ms var(--halo-ease)}
+#aside-content .card-widget{padding:22px}
+#aside-content .card-widget:hover{box-shadow:var(--halo-shadow)}
+#aside-content .item-headline{font-size:14px;font-weight:650;color:var(--halo-text);margin-bottom:14px;letter-spacing:.01em}
+#aside-content .card-info .author-info__name{font-size:21px;font-weight:650;letter-spacing:-.025em;color:var(--halo-text)}
+#aside-content .card-info .author-info__description{font-size:13px;color:var(--halo-muted)}
+#aside-content .card-info .card-info-data{padding:12px 0;margin:12px 0;border-top:1px solid var(--halo-rule);border-bottom:1px solid var(--halo-rule)}
+#aside-content .card-info .card-info-data-item a .headline{font-size:12px;color:var(--halo-muted)}
+#aside-content .card-info .card-info-data-item a .length-num{font-size:20px;font-weight:600;color:var(--halo-text);font-variant-numeric:tabular-nums}
+#aside-content .card-info #card-info-btn{background:var(--halo-accent);color:var(--halo-accent-ink);border-radius:var(--halo-small-radius);font-weight:550;transition:filter var(--halo-fast),transform var(--halo-fast)}
+#aside-content .card-info #card-info-btn:hover{filter:brightness(.93)}
+#aside-content .card-tag-cloud{display:flex;flex-wrap:wrap;gap:6px;padding:0;text-align:left!important;justify-content:flex-start}
+#aside-content .card-tag-cloud a{font-size:12px!important;line-height:1.6!important;color:var(--halo-muted)!important;background:var(--halo-raised);border:1px solid var(--halo-rule);border-radius:6px;padding:4px 9px;margin:0;transition:background-color var(--halo-fast),color var(--halo-fast),border-color var(--halo-fast)}
+#aside-content .card-tag-cloud a:hover{background:var(--halo-hover);color:var(--halo-link)!important;border-color:var(--halo-accent)}
+#aside-content .card-archives a,#aside-content .card-webinfo{font-size:13px;color:var(--halo-muted)}
+
+#recent-posts>.recent-post-item{overflow:hidden}
+#recent-posts .recent-post-info .content{overflow-wrap:anywhere}
+#aside-content .card-info .card-info-avatar .avatar-img{object-fit:cover}
+
+/* Archive and category rows keep geometry identical in every state. */
+#aside-content :is(.card-archives,.card-categories) :is(.card-archive-list-item,.card-category-list-item){border-radius:var(--halo-small-radius)}
+#aside-content .card-archives ul.card-archive-list>.card-archive-list-item a,
+#aside-content .card-categories ul.card-category-list>.card-category-list-item a{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;color:var(--halo-muted);border-radius:var(--halo-small-radius)!important;transition:background-color var(--halo-fast),color var(--halo-fast);font-size:13px}
+#aside-content .card-archives ul.card-archive-list>.card-archive-list-item a:hover,
+#aside-content .card-categories ul.card-category-list>.card-category-list-item a:hover{padding:6px 10px;background:var(--halo-hover);color:var(--halo-link)}
+#aside-content :is(.card-archives,.card-categories) a:focus-visible{outline:2px solid var(--halo-focus);outline-offset:-2px}
+@media(hover:hover) and (pointer:fine){
+  #recent-posts>.recent-post-item:hover{border-color:color-mix(in srgb,var(--halo-accent) 38%,var(--halo-rule));box-shadow:var(--halo-shadow-raised)}
+  #recent-posts>.recent-post-item:hover>.recent-post-info>.article-title{color:var(--halo-link)}
+  #recent-posts .recent-post-item:hover .post_cover img{transform:scale(1.045)}
+  #aside-content .card-info #card-info-btn:active,#rightside>div>button:active{transform:scale(.97)}
+}
+@media(min-width:769px){ #recent-posts>.recent-post-item{min-height:196px}#recent-posts>.post-card-large{height:214px!important}}
+@media(max-width:768px){
+  .layout{padding:16px 12px}
+  #recent-posts>.recent-post-item>.recent-post-info{padding:18px 19px}
+  #recent-posts>.recent-post-item>.recent-post-info>.article-title{font-size:20px}
+  #aside-content .card-widget{padding:18px}
+  #post #article-container{font-size:15px;line-height:1.85}
+}
+
+@media(max-width:768px){
+  #content-inner.layout{padding:14px 12px!important}
+  #recent-posts>.recent-post-item:not(:first-child){margin-top:14px!important}
+  #recent-posts>.recent-post-item{border-radius:12px!important}
+  #recent-posts>.recent-post-item>.recent-post-info>.article-meta-wrap{display:block;font-size:11px}
+}

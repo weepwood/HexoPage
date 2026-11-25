@@ -1,0 +1,13 @@
+#springBanner{isolation:isolate;overflow:hidden;touch-action:pan-y;contain:layout paint;position:relative}
+#springBanner>.layer{pointer-events:none;transform:translate3d(0,0,0)}
+#springBanner.is-tracking>.layer{will-change:transform}
+#springBanner>.layer img{flex-shrink:0;max-width:none;user-select:none;-webkit-user-drag:none}
+#springBanner>#canvas{pointer-events:none}
+@media(prefers-reduced-motion:reduce){ #springBanner>.layer{transform:none!important}}
+#springBanner .halo-petals{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;overflow:hidden}
+#springBanner.is-tracking .halo-petals{opacity:1}
+#springBanner .halo-petals span{position:absolute;left:var(--left);top:-20px;width:14px;height:14px;background:url(/images/archive/petal-1.webp) center/contain no-repeat;animation:halo-petal var(--duration) var(--delay) linear infinite;animation-play-state:paused}
+#springBanner .halo-petals span:nth-child(2n){background-image:url(/images/archive/petal-2.webp);width:10px;height:10px}
+#springBanner.is-tracking .halo-petals span{animation-play-state:running}
+@keyframes halo-petal{from{transform:translate3d(0,-15px,0) rotate(0deg)}to{transform:translate3d(70px,220px,0) rotate(230deg)}}
+@media(prefers-reduced-motion:reduce),(hover:none){ #springBanner .halo-petals{display:none}}

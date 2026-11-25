@@ -1,0 +1,18 @@
+html,body,body p,body li,body table,body h1,body h2,body h3,body h4,body h5,body h6,body a.link-card .text,button,input,textarea,select{font-family:var(--halo-sans)}
+body{font-size:15px;line-height:1.7;color:var(--halo-text);background:var(--halo-canvas);-webkit-font-smoothing:antialiased}
+#body-wrap{background:radial-gradient(ellipse at 15% 0%,rgba(117,145,203,.11),transparent 38rem),radial-gradient(ellipse at 91% 4%,rgba(120,176,170,.065),transparent 32rem),var(--halo-canvas)}
+[data-theme=dark] #body-wrap{background:radial-gradient(ellipse at 14% 0%,rgba(70,101,156,.12),transparent 40rem),var(--halo-canvas)}
+#content-inner{--light_bg_color:var(--halo-surface);--dark_bg_color:var(--halo-surface);--light_page_color:var(--halo-surface);--dark_page_color:var(--halo-surface);--dark_font_color_my:var(--halo-muted)}
+
+#article-container{line-height:1.85;overflow-wrap:anywhere}
+#article-container img{max-width:100%;height:auto}
+#article-container pre,#article-container .highlight{overflow:auto}
+#page .tag-cloud-list a{border-radius:8px!important}
+#article-container img{border-radius:5px}
+[data-theme=dark] #page .tag-cloud-list a{background:#303944;color:#dce4ef!important}
+[data-theme=dark] #footer #footer-wrap,[data-theme=dark] #footer #footer-wrap a{color:#b8c3d0}
+.halo-skip-link{position:fixed;left:12px;top:8px;z-index:99999;padding:10px 16px;border-radius:8px;background:var(--halo-surface);color:var(--halo-link);transform:translateY(-150%)}
+.halo-skip-link:focus{transform:translateY(0)}
+/* Focus belongs to interactive controls, not the entire layout's skip-link destination. */
+#content-inner[tabindex="-1"]:focus{outline:none;box-shadow:none}
+:where(a,button,input,textarea,select,summary,[role="button"]):focus-visible{outline:2px solid var(--halo-focus);outline-offset:3px}
