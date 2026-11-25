@@ -89,3 +89,31 @@
 @media(max-width:600px){ #post #article-container{font-size:15px;line-height:1.85}#local-search .search-dialog{width:calc(100vw - 24px);max-height:calc(100dvh - 48px)}#local-search-results{overscroll-behavior:contain}}
 
 #article-container img[width][height]{max-width:100%;height:auto}
+
+/* V2.5: preserve the Butterfly card geometry and original accent. */
+:root{--halo-surface:#fff;--halo-text:#253247;--halo-muted:#536579;--halo-link:#246da5;--halo-hover:rgba(55,135,195,.09);--halo-rule:rgba(45,65,90,.12);--halo-code:#edf2f7;--halo-code-text:#26384a}
+[data-theme=dark]{--halo-surface:#20252d;--halo-text:#e4e9f1;--halo-muted:#aebbd0;--halo-link:#9acdf5;--halo-hover:rgba(105,175,230,.12);--halo-rule:rgba(180,195,215,.15);--halo-code:#282f3b;--halo-code-text:#e2e9f3}
+#recent-posts>.recent-post-item,#aside-content .card-widget,#post,#page,#archive,#tag,#category{border-color:var(--halo-rule)}
+#recent-posts>.recent-post-item>.recent-post-info>.article-title,#aside-content .item-headline,#post #article-container{color:var(--halo-text)}
+#recent-posts .article-meta-wrap,#aside-content .card-info-data .headline,#card-toc .halo-toc-progress,.halo-reading-tools{color:var(--halo-muted)}
+#article-container a:not(.fancybox):not(.link-card):not(.header-anchor){color:var(--halo-link)}
+#article-container :is(h2,h3,h4,h5,h6){color:var(--halo-text);line-height:1.45}
+#article-container :not(pre)>code{background:var(--halo-code);color:var(--halo-code-text);padding:.15em .35em;border-radius:4px}
+#article-container .highlight{border-radius:8px;border:1px solid var(--halo-rule)}
+#article-container .highlight .highlight-tools{min-height:32px}
+#article-container mjx-container[display=true]{max-width:100%;overflow-x:auto;overflow-y:hidden;padding:.15em 0 .3em;margin:1.2em 0!important;line-height:normal!important}
+#article-container mjx-container:not([display=true]){line-height:normal!important;max-width:100%}
+#article-container .mathjax-overflow{overflow-wrap:anywhere}
+#article-container .tabs,#article-container .note,#article-container details{max-width:100%;overflow-wrap:anywhere}
+#local-search-results .search-result-title{color:var(--halo-link)}
+#local-search-results .search-result{color:var(--halo-muted)}
+#card-toc .toc-link{color:var(--halo-muted)}
+#nav :is(a,button):focus-visible,#rightside :is(a,button):focus-visible{outline:2px solid #49a4dc;outline-offset:3px}
+.halo-skip-link{position:fixed;left:12px;top:8px;z-index:99999;padding:10px 16px;border-radius:8px;background:var(--halo-surface);color:var(--halo-link);transform:translateY(-150%)}
+.halo-skip-link:focus{transform:translateY(0)}
+@media(max-width:600px){ #post #article-container{overflow-wrap:anywhere}#article-container .highlight,#article-container .table-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}#article-container .tabs .nav-tabs{overflow-x:auto;flex-wrap:nowrap}#card-toc .halo-toc-branch{min-height:32px;min-width:28px}}
+#article-container del{color:var(--halo-muted)}
+#article-container details>summary{color:var(--halo-text)}
+#article-container .highlight .copy-button:focus-visible{outline:2px solid #49a4dc;outline-offset:3px}
+#article-container .note.warning.modern>p{color:#684707}
+[data-theme=dark] #article-container .note.warning.modern>p{color:#f3d5a0}

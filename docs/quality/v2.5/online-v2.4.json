@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-25T10:49:00.379Z",
+  "runs": [
+    {
+      "label": "desktop",
+      "url": "https://weepwood.github.io/HexoPage/",
+      "wallMs": 4400,
+      "vitals": {
+        "LCP": {
+          "value": 1512,
+          "rating": "good"
+        },
+        "CLS": {
+          "value": 0.0013884752647703403,
+          "rating": "good"
+        },
+        "INP": {
+          "value": 32,
+          "rating": "good"
+        }
+      },
+      "ttfb": 450.2000000476837,
+      "resources": 22,
+      "transferBytes": 617295,
+      "failed": []
+    },
+    {
+      "label": "mobile-emulated",
+      "url": "https://weepwood.github.io/HexoPage/",
+      "wallMs": 3871,
+      "vitals": {
+        "LCP": {
+          "value": 544,
+          "rating": "good"
+        },
+        "CLS": {
+          "value": 0.000520523989183859,
+          "rating": "good"
+        },
+        "INP": {
+          "value": 32,
+          "rating": "good"
+        }
+      },
+      "ttfb": 270.7999999523163,
+      "resources": 20,
+      "transferBytes": 526735,
+      "failed": []
+    }
+  ]
+}

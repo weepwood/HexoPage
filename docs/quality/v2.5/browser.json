@@ -1,0 +1,64 @@
+[
+  {
+    "label": "desktop-chromium",
+    "width": [
+      1440,
+      1440
+    ],
+    "themes": [
+      "rgb(37, 50, 71)",
+      "rgb(228, 233, 241)"
+    ],
+    "formulas": 4,
+    "mathErrors": 0,
+    "counts": {
+      "code": 16,
+      "tabs": 17,
+      "notes": 36
+    },
+    "frames": [
+      {
+        "width": 1024,
+        "medianMs": 16.69999999999999,
+        "maxMs": 16.80000000000001
+      },
+      {
+        "width": 1440,
+        "medianMs": 16.700000000000045,
+        "maxMs": 16.700000000000273
+      },
+      {
+        "width": 1920,
+        "medianMs": 16.699999999999818,
+        "maxMs": 16.799999999999727
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "label": "android-emulated-chromium",
+    "width": [
+      412,
+      412
+    ],
+    "themes": [
+      "rgb(37, 50, 71)",
+      "rgb(228, 233, 241)"
+    ],
+    "formulas": 4,
+    "mathErrors": 0,
+    "counts": {
+      "code": 16,
+      "tabs": 17,
+      "notes": 36
+    },
+    "frames": [],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "label": "ios-emulated-webkit",
+    "blocked": "browserType.launch: Executable doesn't exist at /Users/weepwood/Library/Caches/ms-playwright/webkit-2215/pw_run.sh"
+  }
+]

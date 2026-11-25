@@ -9,7 +9,7 @@ FONT_URL='https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400..700&di
 
 def prepare(work):
     opt=work/'butterfly-optimized'
-    config=work/'_config.yml';c=config.read_text();c=re.sub(r'(?m)^skip_render:.*$', 'skip_render:\n  - CodePen/**\n  - images/archive/**', c);config.write_text(c)
+    config=work/'_config.yml';c=config.read_text();c=re.sub(r'(?m)^skip_render:.*$', 'skip_render:\n  - CodePen/**\n  - images/archive/**\n  - vendor/**', c);config.write_text(c)
     shutil.copy2(opt/'assets/missing.svg',work/'source/images/archive/missing.svg')
     shutil.copy2(opt/'parallax.js',work/'source/js/bilibili-banner.js')
     manifest=json.loads((opt/'assets/images.json').read_text())
