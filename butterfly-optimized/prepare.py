@@ -46,6 +46,15 @@ def prepare(work):
     banner=work/'source/js/bilibili-banner.js';b=banner.read_text();b=b.replace('ctx.drawImage(this.img, this.x, this.y, this.width, this.height)\n    }','if (this.img.complete && this.img.naturalWidth) ctx.drawImage(this.img, this.x, this.y, this.width, this.height)\n    }');b=b.replace('    ctx.clearRect(0, 0, _w, _h)','    if (document.hidden || mb.getBoundingClientRect().bottom < 0) { window.requestAnimationFrame(move); return }\n    ctx.clearRect(0, 0, _w, _h)').replace('start()\nmove()','if (!matchMedia("(prefers-reduced-motion: reduce)").matches) { start(); move() }');banner.write_text(b)
     policy=load_policy(opt)
     if policy:policy.prepare(work)
+    toc=opt/'toc.js'
+    if toc.exists():
+        main=theme/'source/js/main.js'
+        js=main.read_text()
+        start=js.index('  const tocFn = function () {')
+        end=js.index('  /**\n * Rightside',start)
+        js=js[:start]+'  const tocFn = function () { window.haloInitToc() }\n\n'+js[end:]
+        main.write_text(toc.read_text()+'\n'+js)
+
     subprocess.run(['npm','ci','--ignore-scripts','--no-audit','--no-fund'],cwd=opt,check=True)
     n=opt/'node_modules';dst=work/'source/vendor'
     for source,target in [('@fortawesome/fontawesome-free/css/all.min.css','fontawesome/css/all.min.css'),('jquery/dist/jquery.min.js','jquery/jquery.min.js'),('@fancyapps/fancybox/dist/jquery.fancybox.min.css','fancybox/jquery.fancybox.min.css'),('@fancyapps/fancybox/dist/jquery.fancybox.min.js','fancybox/jquery.fancybox.min.js')]:
