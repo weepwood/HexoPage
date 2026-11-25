@@ -55,3 +55,6 @@
 ## V2.8 导航规范
 - 顶部导航参考 DeepSeek 的透明、轻量文字与分区结构，禁止恢复整条黑色遮罩。复杂图片使用局部主题对比表面，保留横幅与视差。
 - navigation.css/navigation.js 管理导航，pages.css 管理集合内页与阅读 Tab；遵循 DESIGN.md 与 styles/order.json。验收使用 tests/navigation.cjs 和 tests/style-states.cjs。
+
+## V2.8.1
+头图上的品牌、菜单和标题不得添加装饰背景块、边框、阴影底板或 backdrop-filter；使用主题前景色和轻量文字阴影。保留正常浮层与吸顶功能。

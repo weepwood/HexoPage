@@ -1,12 +1,12 @@
 /* DeepSeek-inspired: restrained typography, aligned content width, transparent rail.
-   On imagery only the actual control groups receive a contrast surface. */
+   Artwork is visible behind unboxed text; contrast comes from the glyphs. */
 #page-header #nav,
 #page-header.not-top-img #nav{
   --halo-nav-ink:var(--halo-text);
   --halo-nav-hover:var(--halo-hover);
   --halo-nav-active:var(--halo-link);
-  --halo-nav-glass:transparent;
   --halo-nav-edge:transparent;
+  --halo-nav-shadow:none;
   position:absolute;top:0;left:0;width:100%;height:64px;
   padding:0 max(20px,calc((100% - 1170px)/2));
   display:flex;flex-flow:row nowrap;align-items:center;justify-content:space-between;gap:20px;
@@ -48,36 +48,42 @@
 #nav[data-halo-nav] .menus_item:not(.halo-menu-open) .expand{transform:none!important}
 #nav[data-halo-nav] .menus_item.halo-menu-open .expand{transform:rotate(180deg)!important}
 
-/* The whole rail stays transparent; brand and controls sit on small local
-   surfaces with explicit contrast, not a dark gradient across the artwork. */
+/* No decorative background, outline or glass behind header text.
+   Light artwork uses a dark foreground with a subtle light glyph halo. */
 #page-header:not(.not-top-img):not(.nav-fixed) #nav{
-  --halo-nav-ink:#172437;--halo-nav-hover:rgba(55,99,170,.11);--halo-nav-active:#28568f;
-  --halo-nav-glass:rgba(250,252,255,.90);--halo-nav-edge:rgba(55,76,105,.16)
+  --halo-nav-ink:#172437;--halo-nav-hover:transparent;--halo-nav-active:#244d89;
+  --halo-nav-shadow:0 0 2px rgba(255,255,255,.95),0 1px 4px rgba(255,255,255,.8);
 }
 [data-theme=dark] #page-header:not(.not-top-img):not(.nav-fixed) #nav{
-  --halo-nav-ink:#edf3ff;--halo-nav-hover:rgba(155,190,243,.15);--halo-nav-active:#c1dbff;
-  --halo-nav-glass:rgba(25,34,48,.91);--halo-nav-edge:rgba(210,225,248,.19)
+  --halo-nav-ink:#fff;--halo-nav-hover:transparent;--halo-nav-active:#e5f1ff;
+  --halo-nav-shadow:0 1px 2px rgba(8,17,28,.95),0 0 5px rgba(8,17,28,.75);
 }
 #page-header:not(.not-top-img):not(.nav-fixed) #nav :is(#blog_name,#menus){
-  background:var(--halo-nav-glass);border:1px solid var(--halo-nav-edge);border-radius:13px;padding:3px;
-  box-shadow:0 2px 12px rgba(19,33,57,.055);
+  background:none;border:0;border-radius:0;padding:0;box-shadow:none;backdrop-filter:none;
 }
-@supports(backdrop-filter:blur(8px)){
-  #page-header:not(.not-top-img):not(.nav-fixed) #nav :is(#blog_name,#menus){backdrop-filter:blur(8px) saturate(115%)}
+#page-header:not(.not-top-img):not(.nav-fixed) #nav :is(#site-name,.site-page:not(.child)){
+  color:var(--halo-nav-ink);text-shadow:var(--halo-nav-shadow);background:transparent;
+}
+#page-header:not(.not-top-img):not(.nav-fixed) #nav .site-page:not(.child):is(:hover,[aria-current="page"]),
+#page-header:not(.not-top-img):not(.nav-fixed) #nav .halo-menu-open>a.site-page{
+  color:var(--halo-nav-active);background:transparent;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px;
 }
 /* Scroll-up navigation uses the current page surface, never pure black. */
 #page-header.nav-fixed #nav{position:fixed;top:0;transform:translateY(-100%)!important;pointer-events:none;visibility:hidden}
 #page-header.nav-fixed.nav-visible #nav{transform:translateY(0)!important;background:var(--halo-surface)!important;border-bottom:1px solid var(--halo-rule);box-shadow:var(--halo-shadow)!important;pointer-events:auto;visibility:visible}
 #page-header.nav-fixed #nav :is(a,span.site-page,#site-name,#toggle-menu){color:var(--halo-nav-ink);text-shadow:none}
 #page-header.nav-fixed #nav .site-page:hover{color:var(--halo-nav-active)}
-/* Compact title surface only where busy spring artwork requires contrast. */
+/* Keep the original illustration uninterrupted, including behind titles. */
 #page-header:has(#springBanner) :is(#page-site-info,#site-info){text-align:center}
-#page-header:has(#springBanner) :is(#page-site-info,#post-info,#site-info) :is(#site-title,.post-title){
-  display:inline-block;max-width:100%;padding:5px 16px;border-radius:12px;
-  background:rgba(250,252,255,.87);color:#172437;text-shadow:none;line-height:1.4;
+#page-header:has(#springBanner) :is(#site-title,.post-title){
+  display:block;max-width:100%;padding:0;margin-inline:auto;
+  background:transparent;border:0;border-radius:0;box-shadow:none;
+  color:#172437;text-shadow:0 0 3px rgba(255,255,255,.95),0 1px 6px rgba(255,255,255,.7);line-height:1.4;
 }
-[data-theme=dark] #page-header:has(#springBanner) :is(#page-site-info,#post-info,#site-info) :is(#site-title,.post-title){background:rgba(25,34,48,.91);color:#edf3ff}
-#page-header:has(#springBanner) .post-edit-link{color:inherit}
+[data-theme=dark] #page-header:has(#springBanner) :is(#site-title,.post-title){
+  color:#fff;text-shadow:0 1px 3px rgba(8,17,28,.95),0 0 7px rgba(8,17,28,.65);
+}
+#page-header:has(#springBanner) .post-edit-link{color:inherit;text-shadow:inherit}
 #page-header:not(:has(#springBanner)):not(.not-top-img) :is(#post-info,#page-site-info,#site-info){text-shadow:0 1px 4px rgba(0,0,0,.7),0 2px 14px rgba(0,0,0,.5)}
 
 @media(max-width:900px){
@@ -88,3 +94,5 @@
   #nav.hide-menu #search-button span{display:none!important}
   #nav #site-name{font-size:19px}
 }
+
+@media(max-width:768px){ #page-header:has(#springBanner) .post-title{font-size:clamp(20px,5vw,28px);overflow-wrap:anywhere} }
