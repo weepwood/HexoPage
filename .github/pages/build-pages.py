@@ -60,6 +60,20 @@ def build(version, sha, destinations):
             config = re.sub(r'(?m)^  main: https://cdn\.jsdelivr\.net/gh/halo-blog/[^\n]+', '  main: /js/main.js', config)
             config = re.sub(r'(?m)^  utils: https://cdn\.jsdelivr\.net/gh/halo-blog/[^\n]+', '  utils: /js/utils.js', config)
             config = config.replace('https://cdn.jsdelivr.net/gh/halo-blog/cdn-blog-resources@latest/css/bilibili-banner.css', '/css/bilibiliBanner.css')
+            # The original winter/autumn OSS bucket now returns 403. Use the
+            # original theme's spring variant (its assets remain available).
+            config = re.sub(r'(?m)^  style: winter[^\n]*', '  style: spring', config)
+            config = re.sub(r'(?m)^  bilibili_banner: https://cdn\.jsdelivr\.net/gh/halo-blog/[^\n]+', '  bilibili_banner: /js/bilibili-banner.js', config)
+            # Historic analytics endpoints are not required to view the archive.
+            config = re.sub(r'(?m)^(baidu_analytics|google_analytics):[^\n]*', r'\1:', config)
+            config = re.sub(r'(?m)^(  (?:site_uv|site_pv|page_pv)): true', r'\1: false', config)
+            header = work / 'themes/butterfly/layout/includes/header/bilibili-banner.pug'
+            layout = header.read_text(encoding='utf-8')
+            layout = re.sub(r'(?m)^  - var banner_style = .*$', "  - var banner_style = 'spring'", layout)
+            header.write_text(layout, encoding='utf-8')
+            banner = work / 'source/js/bilibili-banner.js'
+            script = banner.read_text(encoding='utf-8')
+            banner.write_text("if (document.getElementById('springBanner') && document.getElementById('canvas')) {\n" + script + '\n}\n', encoding='utf-8')
             theme.write_text(config, encoding='utf-8')
         run('npm', 'ci', '--ignore-scripts', '--legacy-peer-deps', '--no-audit', '--no-fund', cwd=work)
         for relative in destinations:
