@@ -11,3 +11,5 @@ CodePen
 /_pages/
 
 __pycache__/
+
+/.pages-cache/

@@ -72,3 +72,20 @@
 #aside-content #card-toc[data-halo-toc].halo-toc-open{opacity:1;visibility:visible;pointer-events:auto;transform:none}
 #aside-content #card-toc[data-halo-toc] .toc-content{max-height:calc(100vh - 175px);max-height:calc(100dvh - 175px)}
 #aside-content #card-toc[data-halo-toc] .toc-link{padding-top:8px;padding-bottom:8px}}
+
+/* V2.4: reading comfort, original Butterfly surface and navigation. */
+#post #article-container{line-height:1.9}
+#article-container h2{margin-top:2em}
+#article-container h3{margin-top:1.65em}
+#article-container blockquote{border-radius:6px}
+#article-container .table-wrap{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+#article-container .highlight{max-width:100%;overscroll-behavior-x:contain}
+.halo-reading-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 16px;color:var(--toc-link-color);font-size:12px;border-bottom:1px solid var(--halo-border);margin-bottom:16px}
+.halo-reading-tools button{border:1px solid var(--halo-border);background:transparent;border-radius:6px;padding:5px 10px;color:inherit;cursor:pointer}
+.halo-reading-tools button:hover{background:rgba(73,164,220,.12)}
+#local-search-results mark{background:rgba(73,164,220,.19);color:inherit;border-radius:2px}
+#local-search-results .local-search__hit-item{padding:10px 0;border-bottom:1px solid var(--halo-border)}
+#local-search-results .search-result-title:focus-visible{outline:2px solid #49a4dc;outline-offset:3px}
+@media(max-width:600px){ #post #article-container{font-size:15px;line-height:1.85}#local-search .search-dialog{width:calc(100vw - 24px);max-height:calc(100dvh - 48px)}#local-search-results{overscroll-behavior:contain}}
+
+#article-container img[width][height]{max-width:100%;height:auto}

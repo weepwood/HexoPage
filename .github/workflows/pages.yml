@@ -22,6 +22,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/cache@v4
+        with:
+          path: .pages-cache
+          key: halo-pages-${{ runner.os }}-${{ hashFiles('.github/pages/build-pages.py') }}-${{ hashFiles('.github/pages/pages-versions.json') }}
+          restore-keys: |
+            halo-pages-${{ runner.os }}-${{ hashFiles('.github/pages/build-pages.py') }}-
       - uses: actions/configure-pages@v5
         id: pages
       - name: 构建固定版本并验证关键产物

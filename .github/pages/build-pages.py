@@ -2,6 +2,7 @@
 """Build isolated, pinned Hexo snapshots without modifying historical tags."""
 import json
 import html
+import hashlib
 import importlib.util
 import os
 from pathlib import Path
@@ -160,9 +161,40 @@ if __name__ == '__main__':
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir()
+    cache = REPO / '.pages-cache'
+    cache.mkdir(exist_ok=True)
+    fingerprint = hashlib.sha256(Path(__file__).read_bytes() + BASE.encode()).hexdigest()[:16]
+    expected_cache = set()
     for version, sha in MANIFEST['versions'].items():
+        resolved = subprocess.check_output(['git','rev-parse',f'{version}^{{commit}}'], cwd=REPO, text=True).strip()
+        if resolved != sha:
+            raise RuntimeError(f'Tag {version} changed: {resolved}')
         destinations = ([''] if version == MANIFEST['latest'] else []) + [f'versions/{version}']
-        build(version, sha, destinations)
+        missing = []
+        for relative in destinations:
+            key = hashlib.sha256((fingerprint + sha + relative).encode()).hexdigest()
+            expected_cache.add(key)
+            saved = cache / key
+            if (saved/'version.json').is_file() and (saved/'index.html').is_file():
+                meta = json.loads((saved/'version.json').read_text())
+                if meta.get('commit') == sha and meta.get('version') == version:
+                    shutil.copytree(saved, OUT / relative, dirs_exist_ok=True)
+                    print(f'Reused immutable snapshot {version} {relative}', flush=True)
+                    continue
+            missing.append(relative)
+        if missing:
+            build(version, sha, missing)
+            for relative in missing:
+                key = hashlib.sha256((fingerprint + sha + relative).encode()).hexdigest()
+                shutil.copytree(OUT/relative, cache/key, dirs_exist_ok=True) if relative else shutil.copytree(OUT, cache/key, dirs_exist_ok=True, ignore=shutil.ignore_patterns('versions'))
+    for item in cache.iterdir():
+        if item.is_dir() and re.fullmatch(r'[a-f0-9]{64}',item.name) and item.name not in expected_cache:
+            shutil.rmtree(item)
+    # Avoid duplicate indexing of historical preview copies without changing their source tags.
+    for path in (OUT/'versions').rglob('*.html'):
+        content = path.read_text(encoding='utf-8')
+        if 'name="robots"' not in content and '</head>' in content:
+            path.write_text(content.replace('</head>', '<meta name="robots" content="noindex,follow"></head>', 1), encoding='utf-8')
     if not (OUT / 'index.html').is_file():
         raise RuntimeError('Latest version missing')
     (OUT / '.nojekyll').touch()
