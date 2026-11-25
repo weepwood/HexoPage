@@ -1,0 +1,62 @@
+title: HALO
+subtitle: 个人知识与技术记录
+description: 阅读、思考与技术记录
+author: HALO
+language: zh-CN
+timezone: Asia/Shanghai
+url: https://weepwood.github.io/HexoPage
+root: /HexoPage/
+permalink: :year/:month/:day/:title/
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+skip_render: CodePen/**
+new_post_name: :title.md
+default_layout: post
+render_drafts: false
+post_asset_folder: false
+future: true
+updated_option: date
+per_page: 15
+pagination_dir: page
+index_generator:
+  path: ''
+  per_page: 15
+  order_by: -date
+archive_generator:
+  per_page: 30
+category_generator:
+  per_page: 30
+tag_generator:
+  per_page: 30
+syntax_highlighter: highlight.js
+highlight:
+  enable: true
+  line_number: false
+  auto_detect: false
+  wrap: false
+markdown:
+  render:
+    html: true
+    breaks: true
+    linkify: true
+    typographer: true
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-sub
+    - markdown-it-sup
+  anchors:
+    level: 2
+    permalink: true
+    permalinkSymbol: ''
+theme: halo-minimal
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+history_url: /HexoPage/versions/

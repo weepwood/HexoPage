@@ -1,0 +1,1 @@
+<section class="page-heading"><p class="eyebrow">CATEGORY</p><h1><%= page.category %></h1><a href="<%= url_for('/page/categories/') %>">← 所有分类</a></section><%- partial('partials/post-list',{posts:page.posts}) %><%- partial('partials/pagination') %>

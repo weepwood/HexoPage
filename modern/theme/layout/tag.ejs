@@ -1,0 +1,1 @@
+<section class="page-heading"><p class="eyebrow">TAG</p><h1><%= page.tag %></h1><a href="<%= url_for('/page/tags/') %>">← 所有标签</a></section><%- partial('partials/post-list',{posts:page.posts}) %><%- partial('partials/pagination') %>

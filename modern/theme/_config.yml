@@ -1,0 +1,5 @@
+note:
+  style: simple
+tag_plugins:
+  link:
+    placeholder: /favicon.svg

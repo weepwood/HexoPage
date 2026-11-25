@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Build isolated, pinned Hexo snapshots without modifying historical tags."""
 import json
+import html
+import importlib.util
 import os
 from pathlib import Path
 import re
@@ -41,6 +43,53 @@ def rebase_assets(public, prefix):
             path.write_text(patched, encoding='utf-8')
 
 
+def build_modern(repo, destinations, version, sha):
+    spec = importlib.util.spec_from_file_location('prepare_modern', repo / 'modern/prepare.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    with tempfile.TemporaryDirectory(prefix='halo-modern-') as d:
+        work = Path(d)
+        undated = module.prepare(repo, work)
+        run('npm', 'ci', '--ignore-scripts', '--no-audit', '--no-fund', cwd=work)
+        module.vendor(work)
+        for relative in destinations:
+            root = BASE_PATH + ('/' + relative if relative else '') + '/'
+            url = BASE + ('/' + relative if relative else '')
+            (work / '_config.pages.json').write_text(json.dumps({'url': url, 'root': root, 'history_url': BASE_PATH + '/versions/'}), encoding='utf-8')
+            run('npm', 'run', 'clean', cwd=work)
+            run('npm', 'run', 'build', '--', '--config', '_config.yml,_config.pages.json', cwd=work)
+            public = work / 'public'
+            rebase_assets(public, root)
+            index = json.loads((public / 'search-index.json').read_text())
+            expected = len(list((work / 'source/_posts').rglob('*.md')))
+            if len(index) != expected:
+                raise RuntimeError(f'Article count mismatch: {len(index)} != {expected}')
+            for name, budget in {'index.html': 25000, 'css/site.css': 16000, 'js/site.js': 8000, 'search-index.json': 100000}.items():
+                if not (public / name).is_file() or not 0 < (public / name).stat().st_size <= budget:
+                    raise RuntimeError(f'Missing or over-budget asset: {name}')
+            for name in ('archives/index.html', 'page/categories/index.html', 'page/tags/index.html', 'atom.xml', 'sitemap.xml', '404.html'):
+                if not (public / name).is_file():
+                    raise RuntimeError(f'Missing route: {name}')
+            for row in index:
+                rel = unquote(urlsplit(row['url']).path).removeprefix(root)
+                if not (public / rel / 'index.html').is_file():
+                    raise RuntimeError(f'Missing article: {rel}')
+            # Preserve the previously published URLs of undated legacy posts.
+            for source, date in undated:
+                row = next((r for r in index if unquote(urlsplit(r['url']).path).endswith('/' + source + '/')), None)
+                if not row:
+                    continue
+                alias = public / '2026/11/25' / source / 'index.html'
+                if not alias.exists():
+                    alias.parent.mkdir(parents=True, exist_ok=True)
+                    target = html.escape(row['url'], quote=True)
+                    alias.write_text(f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={target}"><link rel="canonical" href="{target}"><a href="{target}">文章已迁移</a>', encoding='utf-8')
+            dest = OUT / relative
+            shutil.copytree(public, dest, dirs_exist_ok=True)
+            (dest / 'version.json').write_text(json.dumps({'version': version, 'commit': sha, 'posts': len(index), 'renderer': 'Hexo 8'}, indent=2), encoding='utf-8')
+            print(f'Built modern {root}: {len(index)} articles', flush=True)
+
+
 def build(version, sha, destinations):
     if not re.fullmatch(r'v\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?', version) or not re.fullmatch(r'[a-f0-9]{40}', sha):
         raise ValueError('Invalid pinned version')
@@ -51,6 +100,9 @@ def build(version, sha, destinations):
         work = Path(d)
         archive = subprocess.check_output(['git', 'archive', sha], cwd=REPO)
         subprocess.run(['tar', '-xf', '-'], input=archive, cwd=work, check=True)
+        if (work / 'modern/prepare.py').is_file():
+            build_modern(work, destinations, version, sha)
+            return
         # Do not publish an obsolete custom domain.
         (work / 'source/CNAME').unlink(missing_ok=True)
         # Local theme sources are authoritative; avoid vanished custom CDN JS.

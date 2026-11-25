@@ -9,3 +9,5 @@ _drafts
 CodePen
 *.zip
 /_pages/
+
+__pycache__/
