@@ -40,3 +40,8 @@
 ## V2.5.1 评论系统
 - 新版本使用公开 GitHub Issues 讨论，按不含版本前缀的页面路径生成稳定键，站内只读，写入走 GitHub 登录页面，不向前端放置访问令牌。
 - 原 Valine LeanCloud 应用已归档，旧评论不宣称已迁移。历史版本保持原始系统。测试不得自动发布垃圾评论；保留失败降级及重试。详见 docs/V2.5.1-评论区修复.md。
+
+## V2.6 视觉系统与评论
+- 视觉规则集中维护 butterfly-optimized/design.css，保留 Butterfly 原始结构；Inter/Noto Sans SC 远程可变字体、低饱和双主题、统一交互节奏与 reduced-motion。
+- Giscus 为主要站内评论组件，Discussions 已启用且官方客户端可正常显示，稳定 specific/strict 路径映射；保留旧 Issues 折叠入口与历史 Valine，不在前端保存访问令牌。未实际发帖不得宣称写入验收。
+- 验收使用 tests/design.cjs、tests/giscus.cjs、tests/comments.cjs，详见 docs/V2.6-视觉与站内评论.md。

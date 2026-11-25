@@ -136,3 +136,12 @@
 #halo-comments [hidden]{display:none!important}
 #halo-comments :is(a,button):focus-visible{outline:2px solid #49a4dc;outline-offset:3px}
 @media(max-width:600px){ #halo-comments .halo-comment-intro{align-items:stretch;flex-direction:column}#halo-comments .halo-comment-primary{width:100%}}
+
+/* V2.6: use the embedded editor as primary; keep the old Issues path collapsed. */
+#halo-comments .giscus{width:100%;min-width:0}
+#halo-comments .giscus-frame{width:100%;border:0;display:block}
+#halo-comments .halo-giscus-status{font-size:13px;color:var(--halo-muted);padding:10px 0;margin:0}
+#halo-comments .halo-giscus-retry{padding:8px 14px;border:1px solid var(--halo-rule);background:var(--halo-hover);border-radius:7px;color:var(--halo-text);cursor:pointer}
+#halo-comments .halo-legacy-comments{margin-top:18px;border-top:1px solid var(--halo-rule);padding-top:12px}
+#halo-comments .halo-legacy-comments summary{cursor:pointer;color:var(--halo-muted);font-size:13px;margin-bottom:12px}
+#halo-comments .halo-legacy-comments summary:focus-visible{outline:2px solid #49a4dc;outline-offset:3px}

@@ -5,7 +5,7 @@ from urllib.parse import urlsplit
 from html.parser import HTMLParser
 
 MISSING='/images/archive/missing.svg'
-FONT_URL='https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400..700&display=swap'
+FONT_URL='https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Noto+Sans+SC:wght@400..700&display=swap'
 
 def prepare(work):
     opt=work/'butterfly-optimized'

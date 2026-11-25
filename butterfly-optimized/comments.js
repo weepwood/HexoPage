@@ -13,5 +13,5 @@ threads.sort((a,b)=>a.number-b.number);const issue=threads[0];primary.href='http
 const comments=issue.comments?await get('https://api.github.com/repos/'+repo+'/issues/'+issue.number+'/comments?per_page=30'):[];
 if(!Array.isArray(comments))throw Error('Invalid comments');status.textContent='共 '+(1+issue.comments)+' 条讨论（含首条）'+(threads.length>1?'；发现多个讨论，请通过 GitHub 查看。':'');list.append(comment(issue));for(const c of comments)list.append(comment(c));if(issue.comments>comments.length)list.append(text('p','halo-comment-status','更多评论请在 GitHub 查看。'));
 }catch(e){status.textContent='暂时无法加载讨论，可能是网络或 GitHub 请求限制。仍可通过 GitHub 查看或发表评论。';retry.hidden=false}finally{busy=false}}
-retry.addEventListener('click',load);if('IntersectionObserver'in window){const io=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){io.disconnect();load()}},{rootMargin:'160px'});io.observe(section)}else load()
+retry.addEventListener('click',load);const details=section.querySelector('.halo-legacy-comments');if(details){details.addEventListener('toggle',()=>{if(details.open&&!list.children.length)load()});return}if('IntersectionObserver'in window){const io=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){io.disconnect();load()}},{rootMargin:'160px'});io.observe(section)}else load()
 })();
