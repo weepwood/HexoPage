@@ -1,25 +1,90 @@
-#nav .menus_items .menus_item a.site-page,#nav #site-name{font-size:14px;font-weight:600;letter-spacing:0}
-#nav .menus_items .menus_item a.site-page{padding:7px 9px;border-radius:var(--halo-small-radius);transition:background-color var(--halo-fast),color var(--halo-fast)}
-
-#nav .menus_items .menus_item .menus_item_child{background:var(--halo-surface);border:1px solid var(--halo-rule);border-radius:10px;box-shadow:var(--halo-shadow-raised);padding:5px}
-#nav .menus_items .menus_item .menus_item_child a{color:var(--halo-text);border-radius:6px}
-#nav .menus_items .menus_item .menus_item_child a:hover{background:var(--halo-hover);color:var(--halo-link)}
-
-/* Homepage no-image header is transparent; photographic header has a local contrast scrim. */
-#page-header.not-top-img:not(.nav-fixed) #nav{background:transparent!important;border-bottom:0;box-shadow:none!important}
-#page-header.not-top-img #nav :is(a,span.site-page){color:var(--halo-muted);text-shadow:none}
+/* DeepSeek-inspired: restrained typography, aligned content width, transparent rail.
+   On imagery only the actual control groups receive a contrast surface. */
+#page-header #nav,
+#page-header.not-top-img #nav{
+  --halo-nav-ink:var(--halo-text);
+  --halo-nav-hover:var(--halo-hover);
+  --halo-nav-active:var(--halo-link);
+  --halo-nav-glass:transparent;
+  --halo-nav-edge:transparent;
+  position:absolute;top:0;left:0;width:100%;height:64px;
+  padding:0 max(20px,calc((100% - 1170px)/2));
+  display:flex;flex-flow:row nowrap;align-items:center;justify-content:space-between;gap:20px;
+  background:transparent!important;border:0;box-shadow:none!important;transform:none;
+  transition:transform var(--halo-normal) var(--halo-ease),opacity var(--halo-fast);
+  font-size:14px;font-weight:500;
+}
+#page-header.not-top-img{height:72px;margin-bottom:0}
+#page-header #nav #blog_name{display:flex;align-items:center;flex:0 0 auto;margin:0}
+#nav #site-name{display:inline-flex;align-items:center;min-height:38px;padding:0 12px;border-radius:10px;font-size:20px;font-weight:700;letter-spacing:-.035em;color:var(--halo-nav-ink);text-shadow:none}
+#nav #menus{display:flex;align-items:center;gap:5px;min-width:0;margin:0}
+#nav .menus_items{display:flex;align-items:center;gap:2px;margin:0;padding:0}
+#nav .menus_items .menus_item,#nav #search-button,#nav #toggle-menu{padding:0;margin:0}
+#nav .site-page,#nav .menus_items .menus_item a.site-page{
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:38px;padding:0 12px;margin:0;
+  border-radius:8px;white-space:nowrap;line-height:1.25;font-size:14px;font-weight:500;
+  color:var(--halo-nav-ink);text-shadow:none;text-decoration:none;
+  transition:background-color var(--halo-fast),color var(--halo-fast);
+}
+#nav .menus_items>.menus_item>a.site-page>i:not(.expand){display:none}
+#nav .menus_items .menus_item a.site-page .expand{font-size:10px;padding:0;margin-left:1px;transition:transform var(--halo-fast)}
 #nav .site-page:not(.child)::after{content:none!important;display:none!important}
-#nav .site-page{border-radius:var(--halo-small-radius);transition:background-color var(--halo-fast),color var(--halo-fast)}
+#page-header #nav .site-page:hover,#page-header #nav .site-page[aria-current="page"],#page-header #nav .halo-menu-open>a.site-page{background:var(--halo-nav-hover);color:var(--halo-nav-active)}
+#page-header #nav #search-button a{color:var(--halo-nav-ink)}
+#page-header #nav #search-button a:hover{color:var(--halo-nav-active)}
+#nav #search-button{border-left:1px solid var(--halo-nav-edge);padding-left:4px}
+#nav #search-button .site-page{gap:7px}
+#nav :is(a,button):focus-visible{outline:2px solid var(--halo-focus);outline-offset:2px}
+#nav .menus_items .menus_item .menus_item_child{
+  margin-top:5px;padding:5px;min-width:150px;border:1px solid var(--halo-rule);border-radius:12px;
+  background:var(--halo-surface);box-shadow:var(--halo-shadow-raised);animation:none;
+}
+#nav .menus_items .menus_item .menus_item_child li{display:block;float:none;width:100%;border-radius:8px}
 #nav .menus_items .menus_item .menus_item_child li:hover{background:transparent}
-#nav .menus_items .menus_item .menus_item_child li{border-radius:var(--halo-chip-radius)}
-#nav .site-page:hover{background:var(--halo-hover);color:var(--halo-link)}
-#page-header:not(.not-top-img):not(.nav-fixed) #nav{background:linear-gradient(180deg,rgba(13,22,35,.78),rgba(13,22,35,.66));box-shadow:none;border:0}
-#page-header:not(.not-top-img):not(.nav-fixed) #nav :is(.site-page,#site-name){color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.75)}
-#page-header:not(.not-top-img):not(.nav-fixed) #nav .site-page:hover{background:rgba(255,255,255,.16);color:#fff}
-#page-header.nav-fixed #nav{position:fixed;top:0;transform:translateY(-100%)!important;transition:transform var(--halo-normal) var(--halo-ease),opacity var(--halo-fast);pointer-events:none;visibility:hidden}
-#page-header.nav-fixed.nav-visible #nav{transform:translateY(0)!important;background:var(--halo-surface);border-bottom:1px solid var(--halo-rule);box-shadow:var(--halo-shadow);pointer-events:auto;visibility:visible}
-#page-header.nav-fixed.nav-visible #nav :is(a,span.site-page,#site-name,#toggle-menu){color:var(--halo-muted);text-shadow:none}
-#page-header.nav-fixed.nav-visible #nav .site-page:hover{background:var(--halo-hover);color:var(--halo-link)}
-#nav :is(a,button):focus-visible{outline:2px solid var(--halo-focus);outline-offset:3px}
+#nav .menus_items .menus_item .menus_item_child a{width:100%;justify-content:flex-start;color:var(--halo-text)!important;border-radius:8px;padding:0 10px}
+#nav .menus_items .menus_item .menus_item_child a:hover{background:var(--halo-hover);color:var(--halo-link)!important}
+#nav[data-halo-nav] .menus_item .menus_item_child{display:none}
+#nav[data-halo-nav] .menus_item.halo-menu-open .menus_item_child{display:flex;flex-direction:column;gap:2px}
+#nav[data-halo-nav] .menus_item:not(.halo-menu-open) .expand{transform:none!important}
+#nav[data-halo-nav] .menus_item.halo-menu-open .expand{transform:rotate(180deg)!important}
 
-#page-header:not(.not-top-img) :is(#post-info,#page-site-info,#site-info){text-shadow:0 1px 4px rgba(0,0,0,.7),0 2px 14px rgba(0,0,0,.5)}
+/* The whole rail stays transparent; brand and controls sit on small local
+   surfaces with explicit contrast, not a dark gradient across the artwork. */
+#page-header:not(.not-top-img):not(.nav-fixed) #nav{
+  --halo-nav-ink:#172437;--halo-nav-hover:rgba(55,99,170,.11);--halo-nav-active:#28568f;
+  --halo-nav-glass:rgba(250,252,255,.90);--halo-nav-edge:rgba(55,76,105,.16)
+}
+[data-theme=dark] #page-header:not(.not-top-img):not(.nav-fixed) #nav{
+  --halo-nav-ink:#edf3ff;--halo-nav-hover:rgba(155,190,243,.15);--halo-nav-active:#c1dbff;
+  --halo-nav-glass:rgba(25,34,48,.91);--halo-nav-edge:rgba(210,225,248,.19)
+}
+#page-header:not(.not-top-img):not(.nav-fixed) #nav :is(#blog_name,#menus){
+  background:var(--halo-nav-glass);border:1px solid var(--halo-nav-edge);border-radius:13px;padding:3px;
+  box-shadow:0 2px 12px rgba(19,33,57,.055);
+}
+@supports(backdrop-filter:blur(8px)){
+  #page-header:not(.not-top-img):not(.nav-fixed) #nav :is(#blog_name,#menus){backdrop-filter:blur(8px) saturate(115%)}
+}
+/* Scroll-up navigation uses the current page surface, never pure black. */
+#page-header.nav-fixed #nav{position:fixed;top:0;transform:translateY(-100%)!important;pointer-events:none;visibility:hidden}
+#page-header.nav-fixed.nav-visible #nav{transform:translateY(0)!important;background:var(--halo-surface)!important;border-bottom:1px solid var(--halo-rule);box-shadow:var(--halo-shadow)!important;pointer-events:auto;visibility:visible}
+#page-header.nav-fixed #nav :is(a,span.site-page,#site-name,#toggle-menu){color:var(--halo-nav-ink);text-shadow:none}
+#page-header.nav-fixed #nav .site-page:hover{color:var(--halo-nav-active)}
+/* Compact title surface only where busy spring artwork requires contrast. */
+#page-header:has(#springBanner) :is(#page-site-info,#site-info){text-align:center}
+#page-header:has(#springBanner) :is(#page-site-info,#post-info,#site-info) :is(#site-title,.post-title){
+  display:inline-block;max-width:100%;padding:5px 16px;border-radius:12px;
+  background:rgba(250,252,255,.87);color:#172437;text-shadow:none;line-height:1.4;
+}
+[data-theme=dark] #page-header:has(#springBanner) :is(#page-site-info,#post-info,#site-info) :is(#site-title,.post-title){background:rgba(25,34,48,.91);color:#edf3ff}
+#page-header:has(#springBanner) .post-edit-link{color:inherit}
+#page-header:not(:has(#springBanner)):not(.not-top-img) :is(#post-info,#page-site-info,#site-info){text-shadow:0 1px 4px rgba(0,0,0,.7),0 2px 14px rgba(0,0,0,.5)}
+
+@media(max-width:900px){
+  #page-header #nav,#page-header.not-top-img #nav{gap:10px;padding:0 12px;height:60px}
+  #nav .site-page,#nav .menus_items .menus_item a.site-page{padding:0 8px}
+  #nav.hide-menu .menus_items{display:none}
+  #nav.hide-menu #toggle-menu{display:block!important}
+  #nav.hide-menu #search-button span{display:none!important}
+  #nav #site-name{font-size:19px}
+}

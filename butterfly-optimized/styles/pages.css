@@ -1,0 +1,22 @@
+/* Interior collection views share the same typography, spacing and states. */
+#archive .article-sort-title,#tag .article-sort-title,#category .article-sort-title,
+#page .category-title,#page .tag-cloud-title{font-size:clamp(21px,2.1vw,28px);font-weight:650;letter-spacing:-.025em;color:var(--halo-text)}
+#archive .article-sort-item.year,#tag .article-sort-item.year,#category .article-sort-item.year{font-size:21px;font-weight:600;color:var(--halo-text)}
+.article-sort-item:not(.year){border-radius:var(--halo-small-radius);transition:background-color var(--halo-fast);padding:6px 8px}
+.article-sort-item:not(.year):hover{background:var(--halo-hover)}
+.article-sort-item .article-sort-item-title{font-size:15px;font-weight:550;color:var(--halo-text);transition:color var(--halo-fast)}
+.article-sort-item .article-sort-item-title:hover{color:var(--halo-link);transform:none!important;margin-left:0!important}
+.article-sort-item .article-sort-item-time{font-size:12px;color:var(--halo-muted)}
+.article-sort-item .article-sort-item-img{border-radius:8px;overflow:hidden}
+#page .category-list-link{color:var(--halo-text);transition:color var(--halo-fast)}
+#page .category-list-link:hover{color:var(--halo-link)}
+#page .category-list-count{color:var(--halo-muted);font-variant-numeric:tabular-nums}
+#page .tag-cloud-list{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:22px auto 0}
+#page .tag-cloud-list a{font-size:14px!important;color:var(--halo-link)!important;background:var(--halo-raised);border:1px solid var(--halo-rule);border-radius:8px!important;margin:0;padding:7px 12px;line-height:1.6;transition:background-color var(--halo-fast),color var(--halo-fast),border-color var(--halo-fast)}
+#page .tag-cloud-list a:hover{background:var(--halo-hover)!important;border-color:var(--halo-accent);color:var(--halo-link)!important;transform:none!important}
+#article-container .tabs{border:1px solid var(--halo-rule);border-radius:10px;overflow:hidden}
+#article-container .tabs>.nav-tabs{background:var(--halo-raised);border-bottom:1px solid var(--halo-rule)}
+#article-container .tabs>.nav-tabs>.tab{border:0}
+#article-container .tabs>.nav-tabs>.tab button{color:var(--halo-muted);background:transparent;transition:color var(--halo-fast),background-color var(--halo-fast)}
+#article-container .tabs>.nav-tabs>.tab.active button{color:var(--halo-link);background:var(--halo-surface);box-shadow:inset 0 -2px var(--halo-accent)}
+#article-container .tabs>.tab-contents{background:var(--halo-surface)}

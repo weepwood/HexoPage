@@ -58,7 +58,7 @@ def prepare(work):
         start=js.index('  const tocFn = function () {')
         end=js.index('  /**\n * Rightside',start)
         js=js[:start]+'  const tocFn = function () { window.haloInitToc() }\n\n'+js[end:]
-        main.write_text(toc.read_text()+';\n'+(opt/'reading.js').read_text()+';\n'+js)
+        main.write_text(toc.read_text()+';\n'+(opt/'reading.js').read_text()+';\n'+(opt/'navigation.js').read_text()+';\n'+js)
 
     subprocess.run(['npm','ci','--ignore-scripts','--no-audit','--no-fund'],cwd=opt,check=True)
     spec=importlib.util.spec_from_file_location('compat',opt/'compat.py');compat=importlib.util.module_from_spec(spec);spec.loader.exec_module(compat);compat.prepare(work)

@@ -51,3 +51,7 @@
 - 默认/hover/选中/键盘焦点分离，hover 不改变圆角及间距，不新增 transition: all；首页透明导航，有图头部局部对比遮罩。
 - Giscus 只保留站内编辑器，关闭独立表情区，禁止恢复旧 Issues 备用 UI；历史数据不删除。
 - 样式回归优先 tests/style-states.cjs、tests/design.cjs、tests/giscus.cjs。
+
+## V2.8 导航规范
+- 顶部导航参考 DeepSeek 的透明、轻量文字与分区结构，禁止恢复整条黑色遮罩。复杂图片使用局部主题对比表面，保留横幅与视差。
+- navigation.css/navigation.js 管理导航，pages.css 管理集合内页与阅读 Tab；遵循 DESIGN.md 与 styles/order.json。验收使用 tests/navigation.cjs 和 tests/style-states.cjs。
